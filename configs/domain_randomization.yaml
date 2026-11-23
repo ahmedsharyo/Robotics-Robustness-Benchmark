@@ -1,0 +1,21 @@
+seed: 11
+training:
+  total_timesteps: 100000
+  rollout_steps: 1024
+  batch_size: 256
+  epochs: 10
+  learning_rate: 0.0003
+  eval_interval: 5000
+  checkpoint_dir: results/checkpoints/randomized
+environment:
+  episode_steps: 200
+  control_dt: 0.04
+  success_threshold: 0.08
+  randomization: true
+randomization:
+  mass: [0.75, 1.25]
+  friction: [0.5, 1.8]
+  actuator_strength: [0.8, 1.2]
+  delay_steps: [0, 2]
+  sensor_noise: [0.0, 0.02]
+  disturbance_force: [0.0, 0.8]

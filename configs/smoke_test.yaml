@@ -1,0 +1,14 @@
+seed: 7
+training:
+  total_timesteps: 512
+  rollout_steps: 128
+  batch_size: 64
+  epochs: 2
+  learning_rate: 0.0003
+  eval_interval: 256
+  checkpoint_dir: results/checkpoints/smoke
+environment:
+  episode_steps: 100
+  control_dt: 0.04
+  success_threshold: 0.08
+  randomization: false
