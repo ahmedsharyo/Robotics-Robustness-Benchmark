@@ -18,11 +18,16 @@ class ArmReachEnv(gym.Env):
         super().__init__()
         self.model = mujoco.MjModel.from_xml_string(XML)
         self.data = mujoco.MjData(self.model)
-        self.nominal = {"body_mass": self.model.body_mass.copy(), "body_inertia": self.model.body_inertia.copy(), "frictionloss": self.model.dof_frictionloss.copy(), "actuator_gainprm": self.model.actuator_gainprm.copy()}
+        self.nominal = {"body_mass": self.model.body_mass.copy(),
+                        "body_inertia": self.model.body_inertia.copy(),
+                        "frictionloss": self.model.dof_frictionloss.copy(), "actuator_gainprm": self.model.actuator_gainprm.copy()}
         self.episode_steps, self.control_dt = episode_steps, control_dt
         self.frame_skip = max(1, round(control_dt / self.model.opt.timestep))
         self.success_threshold, self.randomization = success_threshold, randomization
-        self.ranges = randomization_ranges or {"mass": (.75, 1.25), "friction": (.5, 1.8), "actuator_strength": (.8, 1.2), "delay_steps": (0, 2), "sensor_noise": (0., .02), "disturbance_force": (0., .8)}
+        self.ranges = randomization_ranges or {"mass": (.75, 1.25),
+                                               "friction": (.5, 1.8),
+                                               "actuator_strength": (.8, 1.2),
+                                               "delay_steps": (0, 2), "sensor_noise": (0., .02), "disturbance_force": (0., .8)}
         self.action_space = spaces.Box(-1., 1., (2,), dtype=np.float32)
         self.observation_space = spaces.Box(-np.inf, np.inf, (10,), dtype=np.float32)
         self.rng = np.random.default_rng()
